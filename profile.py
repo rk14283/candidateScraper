@@ -1,5 +1,4 @@
-#Importing packages 
-from openpyxl import Workbook
+#from openpyxl import Workbook
 from openpyxl.styles import Font
 
 from openpyxl import load_workbook
@@ -28,10 +27,12 @@ while True:
     user_name = input("Please enter candidate name (enter 'exit' to quit): ")
     if user_name.lower() == "exit":
         break
+
     if user_name in existing_candidates:
       print("Candidate name already exists. Please enter a unique name.")
-      continue  
-       # Ask the user for candidate link
+      continue
+    
+     # Ask the user for candidate link
     user_link = input("Please enter a candidate link: ")
     # Find the last used row with a hyperlink in the specified column
     if user_link in existing_candidates:
@@ -40,29 +41,21 @@ while True:
     
     current_row = sheet.max_row + 1
     
-        # Write the candidate number to the sheet
+    # Write the candidate number to the sheet
     cell_number = sheet.cell(row=current_row, column=number_column)
     cell_number.value = next_candidate_number
     
-      # Write the candidate name and link to the sheet
+          # Write the candidate name and link to the sheet
     cell_link = sheet.cell(row=current_row, column=link_column)
     cell_link.value = user_name
     cell_link.hyperlink = user_link
-
-    # Add the new candidate to the existing_candidates set
+    
+      # Add the new candidate to the existing_candidates set
     existing_candidates.add(user_name)
-
-    # Increment the candidate number for the next entry
+    
+        # Increment the candidate number for the next entry
     next_candidate_number += 1
-
-    # Save the workbook after each entry
+    
+        # Save the workbook after each entry
     workbook.save("profiles.xlsx")
-    
-    
-    
-
-
-
-
-
-
+   
